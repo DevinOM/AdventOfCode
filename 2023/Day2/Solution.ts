@@ -68,11 +68,14 @@ solveDayTwoPartOne();
 
 function solveDayTwoPartOne() {
   const wordsList:string[] = getStringListFromFile("./2023/Day2/input.txt");
+  let games:Game[] = [];
   let sum:number = 0;
 
+  // PART 1 //
   wordsList.forEach((line, index) => {
     let lineList = line.split(/[;:]/);
     const game:Game = createGameFromLine(lineList);
+    games.push(game);
     if (!game.overflow) {
       sum += game.id;
     }
@@ -80,8 +83,30 @@ function solveDayTwoPartOne() {
     console.log(game.toString());
     console.log('------------------');
   });
-
   console.log(`Sum: ${sum}`);
+
+  // PART 2 //
+  let sumPart2:number = 0;
+  games.forEach((game) => {
+    let minRed:number = 0;
+    let minGreen:number = 0;
+    let minBlue:number = 0;
+
+    game.rolls.forEach((roll) => {
+      if (roll.red > minRed) {
+        minRed = roll.red;
+      }
+      if (roll.green > minGreen) {
+        minGreen = roll.green;
+      }
+      if (roll.blue > minBlue) {
+        minBlue = roll.blue;
+      }
+    });
+
+    sumPart2 += minRed * minGreen * minBlue;
+  });
+  console.log(`Sum Part 2: ${sumPart2}`);
 }
 
 function getStringListFromFile(filePath: string):string[] {
