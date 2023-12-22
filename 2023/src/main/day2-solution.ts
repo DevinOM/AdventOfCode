@@ -67,7 +67,7 @@ class Roll {
 solveDayTwoPartOne();
 
 function solveDayTwoPartOne() {
-  const wordsList:string[] = getStringListFromFile("./2023/Day2/input.txt");
+  const wordsList:string[] = getStringListFromFile("./Day2/input.txt");
   let games:Game[] = [];
   let sum:number = 0;
 
